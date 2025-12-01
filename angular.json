@@ -17,6 +17,7 @@
           "builder": "@angular/build:application",
           "options": {
             "baseHref": "/front-gestao/",
+            "outputPath": "dist/front-gestao",
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "assets": [
