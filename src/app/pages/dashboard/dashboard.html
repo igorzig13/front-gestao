@@ -1,2 +1,46 @@
 <app-header title="Dashboard" subtitle="Visão geral da gestão de associados"/>
 
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 py-6 ">
+  @for (stat of stats; track stat.id){
+    <app-dashboard-card [stat]="stat" class="flex-1"></app-dashboard-card>
+  }
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+  <!-- Atividades Recentes -->
+  <div class="lg:col-span-2 bg-card rounded-xl shadow-sm border border-border p-6">
+    <h3 class="mb-4">Atividades Recentes</h3>
+    <div class="space-y-4">
+      @for (activity of recentActivities; track activity.id){
+        <div class="flex items-start gap-3 pb-4 border-b border-border last:border-0 last:pb-0">
+          <div class="w-2 h-2 bg-blue-500 rounded-full mt-2"></div>
+          <div class="flex-1">
+            <p class="text-sm">{{activity.text}}</p>
+            <p class="text-xs text-muted-foreground mt-1">{{activity.time}}</p>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+
+  <!-- Próximos Aniversários -->
+  <div class="bg-card rounded-xl shadow-sm border border-border p-6">
+    <h3 class="mb-4">Próximos Aniversários</h3>
+    <div class="space-y-3">
+      @for (person of upcomingBirthdays; track person.id) {
+        <div class="flex items-center justify-between p-3 bg-muted rounded-lg">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-green-500 text-white rounded-full flex items-center justify-center">
+              <mat-icon class="w-5 h-5 ">celebration</mat-icon>
+            </div>
+            <div>
+              <p class="text-sm">{{person.name}}</p>
+              <p class="text-xs text-muted-foreground">{{person.age}} anos</p>
+            </div>
+          </div>
+          <span class="text-xs text-muted-foreground">{{person.date}}</span>
+        </div>
+      }
+    </div>
+  </div>
+</div>
