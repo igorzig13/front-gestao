@@ -3,6 +3,11 @@ import {Login} from './pages/login/login';
 import {DefaultLayout} from './layouts/default-layout/default-layout';
 import {Dashboard} from './pages/dashboard/dashboard';
 import {Associados} from './pages/associados/associados';
+import {Financeiro} from './pages/financeiro/financeiro';
+import {Eventos} from './pages/eventos/eventos';
+import {Mensagens} from './pages/mensagens/mensagens';
+import {Config} from './pages/config/config';
+import {Comunicados} from './pages/comunicados/comunicados';
 
 export const routes: Routes = [
   {
@@ -23,7 +28,32 @@ export const routes: Routes = [
         path: 'associados',
         component: Associados,
         title: 'Gestão de Associados'
-      }
+      },
+      {
+        path: 'financeiro',
+        component: Financeiro,
+        title: 'Gestão Financeira'
+      },
+      {
+        path: 'eventos',
+        component: Eventos,
+        title: 'Eventos'
+      },
+      {
+        path: 'mensagens',
+        component: Mensagens,
+        title: 'Mensagens Automáticas'
+      },
+      {
+        path: 'comunicados',
+        component: Comunicados,
+        title: 'Comunicados'
+      },
+      {
+        path: 'config',
+        component: Config,
+        title: 'Configurações'
+      },
     ]
   },
   { path: '**', redirectTo: '/login', pathMatch: 'full' }
