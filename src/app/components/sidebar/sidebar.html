@@ -1,0 +1,47 @@
+<aside class="w-64 bg-sidebar border-r border-sidebar-border flex flex-col h-screen sticky left-0 top-0">
+  <!-- Logo e Título -->
+  <div class="p-6 border-b border-sidebar-border">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 bg-accent rounded-lg flex items-center justify-center">
+        <span class="text-accent-foreground">A</span>
+      </div>
+      <div>
+        <h1 class="text-sidebar-foreground">AMAPM</h1>
+        <p class="text-sidebar-foreground/70 text-sm">Gestão de Associados</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Menu de Navegação -->
+  <nav class="flex-1 p-4">
+    <ul class="space-y-2">
+      @for (item of menuItems; track $index){
+        <li>
+          <button
+            (click)="onNavigate(item.id)"
+            [class]="getButtonClass(item.id)"
+          >
+            <mat-icon>{{item.icon}}</mat-icon>
+            <span>{{ item.label }}</span>
+          </button>
+        </li>
+      }
+    </ul>
+  </nav>
+
+  <!-- Rodapé -->
+  <div class="p-4 border-t border-sidebar-border">
+    <div class="flex items-center gap-3 px-4 py-2">
+      <div class="w-8 h-8 bg-accent rounded-full flex items-center justify-center">
+        <span class="text-accent-foreground text-sm">AD</span>
+      </div>
+      <div>
+        <p class="text-sidebar-foreground text-sm">{{ userInfo?.name || 'Admin' }}</p>
+        <p class="text-sidebar-foreground/70 text-xs">{{ userInfo?.email || 'admin@amapm.org' }}</p>
+      </div>
+    </div>
+    <div class="flex justify-end">
+      <a routerLink="login" class="text-white bg-blue-500/[10%] hover:bg-sidebar-primary rounded-2xl px-4 py-2 justify-self-end">Sair</a>
+    </div>
+  </div>
+</aside>
