@@ -54,8 +54,11 @@ export const routes: Routes = [
         component: Config,
         title: 'Configurações'
       },
+      {
+        path: '', redirectTo: 'dashboard', pathMatch: 'full'
+      }
     ]
   },
-  { path: '**', redirectTo: '/login', pathMatch: 'full' }
+  { path: '**', redirectTo: 'login', pathMatch: 'full' }
 
 ];
