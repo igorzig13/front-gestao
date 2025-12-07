@@ -1,1 +1,136 @@
-<app-header title="Gestão Financeira" subtitle="Controle de entradas, saídas e fluxo de caixa"/>
+
+
+<div class="space-y-6">
+  <!-- Cabeçalho com botão de exportação -->
+  <div class="flex items-center justify-between">
+    <app-header title="Gestão Financeira" subtitle="Controle de entradas, saídas e fluxo de caixa" />
+    <button
+      (click)="exportarPDF()"
+      class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2"
+    >
+      <svg class="w-5 h-5"  stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" fill="none" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+      </svg>
+      Exportar Relatório PDF
+    </button>
+  </div>
+
+  <!-- Cards de Resumo -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <!-- Card Entradas -->
+    <div class="bg-card rounded-xl shadow-sm border border-border p-6">
+      <div class="flex items-start justify-between mb-4">
+        <div>
+          <p class="text-muted-foreground text-sm mb-1">Total de Entradas</p>
+          <h2 class="text-green-600">
+            R$ {{(totalEntradas / 1000).toFixed(0)}}k
+          </h2>
+        </div>
+        <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+          <svg class="w-6 h-6 text-green-600" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" fill="none" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+          </svg>
+        </div>
+      </div>
+      <p class="text-sm text-muted-foreground">+12.5% vs ano anterior</p>
+    </div>
+
+    <!-- Card Saídas -->
+    <div class="bg-card rounded-xl shadow-sm border border-border p-6">
+      <div class="flex items-start justify-between mb-4">
+        <div>
+          <p class="text-muted-foreground text-sm mb-1">Total de Saídas</p>
+          <h2 class="text-red-600">
+            R$ {{(totalSaidas / 1000).toFixed(0)}}k
+          </h2>
+        </div>
+        <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
+          <svg class="w-6 h-6 text-red-600"  stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" fill="none" stroke-linejoin="round" stroke-width="2" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6" />
+          </svg>
+        </div>
+      </div>
+      <p class="text-sm text-muted-foreground">+8.3% vs ano anterior</p>
+    </div>
+
+    <!-- Card Saldo -->
+    <div class="bg-card rounded-xl shadow-sm border border-border p-6">
+      <div class="flex items-start justify-between mb-4">
+        <div>
+          <p class="text-muted-foreground text-sm mb-1">Saldo do Período</p>
+          <h2 class="text-blue-600">
+            R$ {{(saldo / 1000).toFixed(0)}}k
+          </h2>
+        </div>
+        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+          <svg class="w-6 h-6 text-blue-600"  stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" fill="none" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+      </div>
+      <p class="text-sm text-muted-foreground">Resultado positivo</p>
+    </div>
+  </div>
+
+  <!-- Tabela de Transações Recentes -->
+  <div class="bg-card rounded-xl shadow-sm border border-border overflow-hidden">
+    <div class="p-6 border-b border-border">
+      <h3>Transações Recentes</h3>
+    </div>
+
+    <div class="overflow-x-auto">
+      <table class="w-full">
+        <thead class="bg-muted">
+        <tr>
+          <th class="px-6 py-3 text-left">Data</th>
+          <th class="px-6 py-3 text-left">Descrição</th>
+          <th class="px-6 py-3 text-left">Categoria</th>
+          <th class="px-6 py-3 text-left">Tipo</th>
+          <th class="px-6 py-3 text-right">Valor</th>
+        </tr>
+        </thead>
+        <tbody>
+          @for (transacao of transacoes; track transacao.id) {
+            <tr class="border-b border-border hover:bg-muted/50 transition-colors">
+              <td class="px-6 py-4 text-muted-foreground">{{ transacao.data }}</td>
+              <td class="px-6 py-4">{{ transacao.descricao }}</td>
+              <td class="px-6 py-4">
+              <span class="px-2 py-1 bg-muted rounded-full text-xs">
+                {{ transacao.categoria }}
+              </span>
+              </td>
+              <td class="px-6 py-4">
+              <span
+                [ngClass]="{
+                  'inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs': true,
+                  'bg-green-100 text-green-700': transacao.tipo === 'entrada',
+                  'bg-red-100 text-red-700': transacao.tipo === 'saida'
+                }"
+              >
+                <svg class="w-3 h-3" stroke="currentColor" viewBox="0 0 24 24">
+                  @if (transacao.tipo === 'entrada') {
+                    <path stroke-linecap="round" fill="none" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                  } @else if (transacao.tipo === 'saida'){
+                    <path stroke-linecap="round" fill="none" stroke-linejoin="round" stroke-width="2" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6" />
+                  }
+                </svg>
+                {{ transacao.tipo }}
+              </span>
+              </td>
+              <td
+                [ngClass]="{
+                'px-6 py-4 text-right': true,
+                'text-green-600': transacao.tipo === 'entrada',
+                'text-red-600': transacao.tipo === 'saida'
+              }"
+              >
+                {{ transacao.tipo === 'entrada' ? '+' : '-' }}R$
+                {{ transacao.valor.toFixed(2).replace('.', ',') }}
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
