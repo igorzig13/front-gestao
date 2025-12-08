@@ -31,18 +31,18 @@ export class Associados implements OnInit {
   selectedAssociado: Associado | null = null;
 
   associadosList: Associado[] = [
-    { id: 1, nome: "João Silva", email: "joao@email.com", telefone: "(11) 98765-4321", cidade: "São Paulo", status: "ativo", mensalidade: "em dia" },
-    { id: 2, nome: "Maria Santos", email: "maria@email.com", telefone: "(21) 97654-3210", cidade: "Rio de Janeiro", status: "ativo", mensalidade: "em dia" },
-    { id: 3, nome: "Carlos Oliveira", email: "carlos@email.com", telefone: "(31) 96543-2109", cidade: "Belo Horizonte", status: "ativo", mensalidade: "pendente" },
-    { id: 4, nome: "Ana Costa", email: "ana@email.com", telefone: "(41) 95432-1098", cidade: "Curitiba", status: "inativo", mensalidade: "pendente" },
-    { id: 5, nome: "Pedro Souza", email: "pedro@email.com", telefone: "(51) 94321-0987", cidade: "Porto Alegre", status: "ativo", mensalidade: "em dia" },
-    { id: 6, nome: "Fernanda Lima", email: "fernanda@email.com", telefone: "(61) 93210-9876", cidade: "Brasília", status: "ativo", mensalidade: "em dia" },
+    { id: 1, nome: "João Silva", email: "joao@email.com", telefone: "(84) 98765-4321", cidade: "Natal", status: "ativo", mensalidade: "em dia" },
+    { id: 2, nome: "Maria Santos", email: "maria@email.com", telefone: "(84) 97654-3210", cidade: "Natal", status: "ativo", mensalidade: "em dia" },
+    { id: 3, nome: "Carlos Oliveira", email: "carlos@email.com", telefone: "(84) 96543-2109", cidade: "Parnamirim", status: "ativo", mensalidade: "pendente" },
+    { id: 4, nome: "Ana Costa", email: "ana@email.com", telefone: "(84) 95432-1098", cidade: "Extremoz", status: "inativo", mensalidade: "pendente" },
+    { id: 5, nome: "Pedro Souza", email: "pedro@email.com", telefone: "(84) 94321-0987", cidade: "Parnamirim", status: "ativo", mensalidade: "em dia" },
+    { id: 6, nome: "Fernanda Lima", email: "fernanda@email.com", telefone: "(84) 93210-9876", cidade: "Natal", status: "ativo", mensalidade: "em dia" },
   ];
 
   get filteredAssociados(): Associado[] {
     return this.associadosList.filter((associado) => {
       const matchesSearch = associado.nome.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-        associado.cidade.toLowerCase().includes(this.searchTerm.toLowerCase());
+        associado.email.toLowerCase().includes(this.searchTerm.toLowerCase());
       const matchesStatus = this.statusFilter === "todos" || associado.status === this.statusFilter;
       return matchesSearch && matchesStatus;
     });
