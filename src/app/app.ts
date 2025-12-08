@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import {MatIconRegistry} from '@angular/material/icon';
 
 @Component({
   selector: 'app-root',
@@ -9,4 +9,7 @@ import { RouterOutlet } from '@angular/router';
 })
 export class App {
   protected readonly title = signal('front-gestao');
+  constructor(private matIconRegistry: MatIconRegistry) {
+    matIconRegistry.setDefaultFontSetClass('material-symbols-outlined')
+  }
 }

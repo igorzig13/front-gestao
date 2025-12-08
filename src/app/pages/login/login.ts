@@ -1,4 +1,4 @@
-import {Component } from '@angular/core';
+import {ChangeDetectorRef, Component} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {Router} from '@angular/router';
 import {AuthService} from '../../services/auth/auth';
@@ -19,7 +19,7 @@ export class Login {
   errorMessage = '';
   isLoading = false;
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(private router: Router, private authService: AuthService, private cdr: ChangeDetectorRef) {}
 
   handleSubmit(event: Event) {
     event.preventDefault();
@@ -46,11 +46,12 @@ export class Login {
         this.isLoading = false;
         console.error('Erro no login', err);
 
-        if (err.status === 401 || err.status === 403) {
+        if (err.status === 403 || err.status === 401) {
           this.errorMessage = 'Usuário ou senha inválidos.';
         } else {
           this.errorMessage = 'Erro ao conectar com o servidor. Tente novamente.';
         }
+        this.cdr.detectChanges();
       }
     });
   }
