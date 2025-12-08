@@ -8,6 +8,7 @@ import {Eventos} from './pages/eventos/eventos';
 import {Mensagens} from './pages/mensagens/mensagens';
 import {Config} from './pages/config/config';
 import {Comunicados} from './pages/comunicados/comunicados';
+import {authGuard} from './guards/auth-guard';
 
 export const routes: Routes = [
   {
@@ -18,6 +19,7 @@ export const routes: Routes = [
   {
     path: '',
     component: DefaultLayout,
+    canActivate: [authGuard],
     children: [
       {
         path: 'dashboard',

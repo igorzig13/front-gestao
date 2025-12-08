@@ -41,7 +41,9 @@
       </div>
     </div>
     <div class="flex justify-end">
-      <a routerLink="login" class="text-white bg-blue-500/[10%] hover:bg-sidebar-primary rounded-2xl px-4 py-2 justify-self-end">Sair</a>
+      <a routerLink="login" class="text-white bg-blue-500/[10%] hover:bg-sidebar-primary rounded-2xl px-4 py-2 justify-self-end"
+      (click)="handleLogout()"
+      >Sair</a>
     </div>
   </div>
 </aside>

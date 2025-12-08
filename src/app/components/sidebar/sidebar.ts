@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {MatIcon} from '@angular/material/icon';
 import { sideBarItems } from './menu-items';
 import {Router, RouterLink} from '@angular/router';
+import {AuthService} from '../../services/auth/auth';
 
 export interface MenuItem {
   id: string;
@@ -31,7 +32,7 @@ export class Sidebar implements OnInit {
   currentPage = 'dashboard';
   userInfo: UserInfo = {email: 'admin@amapm.org', name: 'Administrador'}
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authService: AuthService) { }
 
   ngOnInit() {
     this.menuItems.push(...sideBarItems)
@@ -56,5 +57,9 @@ export class Sidebar implements OnInit {
     } else {
       return `${baseClasses} text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground`;
     }
+  }
+
+  protected handleLogout() {
+    this.authService.logout();
   }
 }
