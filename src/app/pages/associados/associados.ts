@@ -3,8 +3,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {Header} from '../../components/header/header';
 import {MatIcon} from '@angular/material/icon';
+import {ActivatedRoute, Router} from '@angular/router';
 
-interface Associado {
+export interface Associado {
   id: number;
   nome: string;
   email: string;
@@ -48,6 +49,8 @@ export class Associados implements OnInit {
     });
   }
 
+  constructor(private router: Router, private route: ActivatedRoute) { }
+
   ngOnInit(): void {}
 
   selectAssociado(associado: Associado): void {
@@ -66,5 +69,9 @@ export class Associados implements OnInit {
       }
       alert(`${nome} foi descadastrado com sucesso!`);
     }
+  }
+
+  protected redirectCadastro() {
+    this.router.navigate(['cadastrar'], { relativeTo: this.route }).finally();
   }
 }

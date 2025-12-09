@@ -49,7 +49,7 @@ export class Sidebar implements OnInit {
 
   getButtonClass(pageId: string): string {
     const baseClasses = 'w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors';
-    const isActive = this.router.url === '/' + pageId;
+    const isActive = this.router.url.startsWith('/' + pageId);
     console.log(this.router.url)
 
     if (isActive) {

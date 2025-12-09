@@ -6,7 +6,7 @@
       <div class="flex items-center gap-4">
         <button
           (click)="deselectAssociado()"
-          class="px-4 py-2 bg-muted rounded-lg hover:bg-muted/80 transition-colors"
+          class="px-4 py-2 bg-muted rounded-lg hover:bg-gray-300 transition-colors"
         >
           ← Voltar
         </button>
@@ -146,7 +146,8 @@
     <!-- Cabeçalho -->
     <div class="flex items-center justify-between">
       <app-header title="Gestão de associados" subtitle="Gerencie todos os associados da AMAPM"></app-header>
-      <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2">
+      <button (click)="redirectCadastro()"
+        class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2">
         <mat-icon>add</mat-icon>
         Cadastrar Associado
       </button>

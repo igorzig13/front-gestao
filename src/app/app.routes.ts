@@ -9,6 +9,7 @@ import {Mensagens} from './pages/mensagens/mensagens';
 import {Config} from './pages/config/config';
 import {Comunicados} from './pages/comunicados/comunicados';
 import {authGuard} from './guards/auth-guard';
+import {CadastroAssociado} from './pages/associados/cadastro/cadastro-associado/cadastro-associado';
 
 export const routes: Routes = [
   {
@@ -30,6 +31,11 @@ export const routes: Routes = [
         path: 'associados',
         component: Associados,
         title: 'Gestão de Associados'
+      },
+      {
+        path: 'associados/cadastrar',
+        component: CadastroAssociado,
+        title: 'Cadastro de Associado'
       },
       {
         path: 'financeiro',
