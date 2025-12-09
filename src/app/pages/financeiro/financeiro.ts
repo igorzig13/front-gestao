@@ -1,18 +1,19 @@
 import { Component } from '@angular/core';
 import {Header} from "../../components/header/header";
 import {NgClass} from '@angular/common';
+import {MatIcon} from '@angular/material/icon';
 
 @Component({
   selector: 'app-financeiro',
   imports: [
     Header,
     NgClass,
+    MatIcon,
   ],
   templateUrl: './financeiro.html',
   styleUrl: './financeiro.css',
 })
 export class Financeiro {
-  periodo = '2025';
 
   dados = [
     { mes: "Jan", entradas: 45000, saidas: 32000 },
@@ -52,12 +53,11 @@ export class Financeiro {
     return this.totalEntradas - this.totalSaidas;
   }
 
-  mudarPeriodo(event: Event): void {
-    const select = event.target as HTMLSelectElement;
-    this.periodo = select.value;
+  exportarPDF(): void {
+    alert("A exportação do relatório em PDF estará disponível em breve!");
   }
 
-  exportarPDF(): void {
-    alert("Relatório PDF será exportado em breve!");
+  protected redirectCadastroTransacao() {
+    alert("Funcionalidade disponível em breve!");
   }
 }
